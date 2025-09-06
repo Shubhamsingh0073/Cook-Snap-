@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>CookSnap - look-Cook-Snap</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="texture" aria-hidden="true"></div>
+    <div class="blobs" aria-hidden="true"></div>
+
+    <div class="app" role="application">
+        <header>
+            <div class="brand">
+                <div class="logo"></div>
+                <div>
+                    <h1>Cook Snap</h1>
+                    <div class="lead">Search TheMealDB and save favourites</div>
+                </div>
+            </div>
+
+            <div class="controls" role="toolbar" aria-label="App controls">
+                <button id="homeBtn" class="btn" title="Home">Home</button>
+
+                <div class="search" role="search">
+                    <input id="searchInput" placeholder="Search recipes (e.g., Chicken, Pasta)"
+                        aria-label="Search recipes" />
+                    <button id="searchBtn" class="btn">Search</button>
+                </div>
+
+                <!-- <button id="rndBtn" class="btn" title="Random accent" aria-label="Randomize accent">🎨</button> -->
+
+                <button id="showFavs" class="btn" title="Show favourites" aria-expanded="false">Favourites <span
+                        id="favCount"
+                        style="margin-left:8px;background:rgba(255,255,255,0.03);padding:2px 8px;border-radius:8px">0</span></button>
+            </div>
+        </header>
+
+        <main>
+            <section class="panel" aria-live="polite" id="resultsPanel">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+                    <div>
+                        <h2 style="margin:0">Results</h2>
+                        <div class="muted" style="font-size:13px">Click a recipe to view details. Use the heart to save
+                            favourites.</div>
+                    </div>
+                    <div class="muted" style="font-size:13px">Tip: press Home to reset</div>
+                </div>
+
+                <div id="results" class="results"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for recipe details -->
+    <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="dialog" role="document" aria-live="polite">
+            <div class="left">
+                <img id="modalImg" src="" alt="Recipe image">
+            </div>
+            <div class="right">
+                <div style="display:flex;justify-content:space-between;align-items:start">
+                    <div>
+                        <h2 id="modalTitle" style="margin:0"></h2>
+                        <div class="muted" style="font-size:13px;margin-top:6px"><span id="modalCategory"></span> <span
+                                id="modalArea"></span></div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:8px;align-items:end">
+                        <button id="modalFav" class="fav" title="Toggle favourite" aria-pressed="false">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z" />
+                            </svg>
+                        </button>
+                        <button id="closeModal" class="btn">Close</button>
+                    </div>
+                </div>
+
+                <div id="modalInstructions" class="muted" style="margin-top:12px"></div>
+
+                <div style="margin-top:14px">
+                    <h4 style="margin:6px 0">Ingredients</h4>
+                    <div id="modalIngredients" class="ingredients"></div>
+                </div>
+
+                <div style="margin-top:14px">
+                    <h4 style="margin:6px 0">Links</h4>
+                    <div id="modalLinks" style="font-size:13px;color:var(--muted)"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Favourites Drawer (hidden by default). Will slide in when .open is set -->
+    <aside id="favDrawer" class="fav-drawer" aria-hidden="true" aria-label="Favourites drawer">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+            <h3 style="margin:0">Favourites</h3>
+            <div>
+                <button id="closeFavs" class="btn" title="Close favourites">Close</button>
+            </div>
+        </div>
+
+        <div id="favListContainer" style="display:flex;flex-direction:column;gap:10px"></div>
+
+        <div style="margin-top:12px">
+            <button id="clearFavs" class="btn">Clear all</button>
+        </div>
+    </aside>
+<script src="home.js"></script>
+</body>
+
+</html>
